@@ -26,6 +26,10 @@ socketIO.on('connection', (socket) => {
     });
 });
 
+socketIO.on('connect_error', (error) => {
+    console.log(`connect_error due to ${error.message}`);
+});
+
 
 app.get('/api', (req, res) => {
     res.json({
@@ -33,6 +37,6 @@ app.get('/api', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
