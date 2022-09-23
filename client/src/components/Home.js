@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-/** 
- * Home page for the chat application that accepts the username 
+/**
+ * Home page for the chat application that accepts the username
  * and saves it to the local storage for identification.
  */
-const Home = () => {
+const Home = ({ socket }) => {
     const navigate = useNavigate();
-    const [ userName, setUserName ] = useState('');
+    const [userName, setUserName] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
         localStorage.setItem('userName', userName);
+        // Sends the username and socket ID to the server.
+        socket.emit('newUser', { userName, socketID: socket.id });
         navigate('/chat');
     };
     return (
