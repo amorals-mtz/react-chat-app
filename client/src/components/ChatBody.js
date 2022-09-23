@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ChatBody = () => {
+const ChatBody = ({ messages }) => {
     const navigate = useNavigate();
 
     const handleLeaveChat = () => {
@@ -19,23 +19,26 @@ const ChatBody = () => {
                 </button>
             </header>
 
-            {/*This shows messages sent from you*/}
             <div className="message__container">
-                <div className="message__chats">
-                    <p className="sender__name"> You </p>
-                    <div className="message__sender">
-                        <p> Hello there </p>
-                    </div>
-                </div>
-
-                {/*This shows messages received by you*/}
-                <div className="message__chats">
-                    <p> Other </p>
-                    <div className="message__recipient">
-                        <p> Hey, I'm good, you? </p>
-                    </div>
-                </div>
-
+                {messages.map((msg) =>
+                    msg.name === localStorage.getItem('userName') ? (
+                        // Shows messages sent from you.
+                        <div className="message__chats" key={msg.id}>
+                            <p className="sender__name"> You </p>
+                            <div className="message__sender">
+                                <p>{msg.text}</p>
+                            </div>
+                        </div>
+                    ) : (
+                        // Shows messages received by you.
+                        <div className="message__chats" key={msg.id}>
+                            <p>{msg.name}</p>
+                            <div className="message__recipient">
+                                <p>{msg.text}</p>
+                            </div>
+                        </div>
+                    )
+                )}
                 {/*This is triggered when a user is typing*/}
                 <div className="message__status">
                     <p> Someone is typing... </p>

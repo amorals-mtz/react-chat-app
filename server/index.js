@@ -20,6 +20,14 @@ const socketIO = require('socket.io')(http, {
 // IMPORTANT: Make sure to add this before the `app.get()` block.
 socketIO.on('connection', (socket) => {
     console.log(`⚡: ${socket.id} user just connected!`);
+
+    // Listen the `message` event from the React app client and send 
+    // the message to all connected clients.
+    socket.on('message', (data) => {
+        console.log(data);
+        socketIO.emit('messageResponse', data);
+    });
+
     // When a user refreshes or closes the web page, the socket fires the disconnect event.
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
