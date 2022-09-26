@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ChatBody = ({ messages, lastMessageRef }) => {
+const ChatBody = ({ messages, typingStatus, lastMessageRef }) => {
     const navigate = useNavigate();
 
     const handleLeaveChat = () => {
@@ -39,9 +39,10 @@ const ChatBody = ({ messages, lastMessageRef }) => {
                         </div>
                     )
                 )}
-                {/*This is triggered when a user is typing*/}
+
+                {/* This is triggered when a user is typing */}
                 <div className="message__status">
-                    <p> Someone is typing... </p>
+                    <p>{typingStatus}</p>
                 </div>
 
                 {/*--- At the bottom of the JSX element ----*/}

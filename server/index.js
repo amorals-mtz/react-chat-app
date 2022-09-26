@@ -29,6 +29,12 @@ socketIO.on('connection', (socket) => {
         socketIO.emit('messageResponse', data);
     });
 
+    // listen the `typing` event and send a response containing the data to other users
+    // via another event called `typingResponse`.
+    socket.on('typing', (data) => (
+        socket.broadcast.emit('typingResponse', data)
+    ));
+
     // Listen when a new user joins the server.
     socket.on('newUser', (data) => {
         // Adds the new user to the list of users.
