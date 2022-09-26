@@ -1,13 +1,11 @@
 const express = require('express');
+const cors = require('cors');
+
 const app = express();
 const PORT = 4000;
 
 // Import HTTP and CORS library to allow data transfer between the client and the server domains.
 const http = require('http').Server(app);
-const cors = require('cors');
-
-app.use(cors());
-
 
 // Add Socket.io to create a real-time connection.
 const socketIO = require('socket.io')(http, {
@@ -16,7 +14,7 @@ const socketIO = require('socket.io')(http, {
     }
 });
 
-
+app.use(cors());
 let users = [];
 
 // Establish a connection with the client application whenever a user visits the web page.

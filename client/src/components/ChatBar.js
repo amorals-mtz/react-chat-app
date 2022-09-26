@@ -15,9 +15,9 @@ const ChatBar = ({ socket }) => {
             <div>
                 <h4 className="chat__header"> ACTIVE USERS </h4>
                 <div className="chat__users">
-                    {users.map((user) => (
+                    {users.map((user) =>
                         <p key={user.socketID}>{user.userName}</p>
-                    ))}
+                    )}
                 </div>
             </div>
         </div>
